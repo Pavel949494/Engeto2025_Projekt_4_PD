@@ -17,8 +17,9 @@ polozky_menu = ["Správce úkolů - Hlavní menu",
 seznam_ukolu = []
 
 def hlavni_menu():
-    """#Funkce hlavního menu, která poskytuje možnosti pro přidání, zobrazení a odstranění úkolu. 
-    Pokud uživatel zadá neplatnou volbu, program ho upozorní a nechá uživatele opakovat znovu."""
+    """Zobrazuje uživatelské rozhraní s dostupnými akcemi a zajišťuje navigaci v programu. 
+    V cyklu vypisuje položky menu a čeká na uživatelskou volbu, dokud není proces ukončen."""
+
     vyber_polozky_menu = True 
     while vyber_polozky_menu:
         for polozka in polozky_menu:
@@ -33,8 +34,8 @@ def hlavni_menu():
     return(zadana_volba)
 
 def pridat_ukol():
-    """Funkce pro zadání nového úkolu, která ukládá název do seznamu a kontroluje, zda není vstup prázdný.
-    Pokud uživatel nic nezadá nebo vloží jen mezeru, program ho vyzve k nápravě a nepustí ho dál."""
+    """Zajišťuje zadání platného názvu úkolu pomocí nekonečného cyklu. 
+    Pokud uživatel zadá prázdný řetězec nebo mezeru, program ho vyzve k novému zadání."""
     
     validace_nazvu_ukolu = True
     while validace_nazvu_ukolu:
@@ -56,8 +57,8 @@ def pridat_ukol():
     return seznam_ukolu
 
 def zobrazit_ukoly():
-    """Funkce pro přehledné vypsání všech uložených úkolů a jejich popisů do konzole.
-    Program spojí názvy úkolů s jejich popisy do slovníku a následně je postupně vytiskne uživateli."""
+    """Vypisuje přehled všech uložených úkolů s jejich pořadovým číslem a popisem. 
+    V případě, že je seznam prázdný, informuje uživatele o tom, že nemá žádné úkoly k zobrazení."""
 
     if seznam_ukolu:
         print ("Seznam Úkolů:")
@@ -67,8 +68,10 @@ def zobrazit_ukoly():
         print("Seznam úkolů je prazdný")
 
 def odstranit_ukol():
-    """Funkce pro současné odstranění názvu i popisu úkolu, která zajišťuje synchronizaci obou seznamů.
-    Program kontroluje číselný vstup, validuje rozsah indexů a v případě nesouladu počtu prvků nebo špatného zadání uživatele upozorní."""
+    """Zajišťuje bezpečné odstranění úkolu ze seznamu podle jeho pořadového čísla. 
+    Program kontroluje, zda je vstupem číslo a zda se daný úkol v seznamu skutečně nachází, 
+    přičemž při neplatném zadání vyzve uživatele k opakování."""
+
     index_smazaneho_ukolu = True 
     while index_smazaneho_ukolu: 
         odebrat_ukol = (input("Zadejte číslo úkolu, který chcete odstranit: "))
@@ -85,12 +88,16 @@ def odstranit_ukol():
     return(seznam_ukolu)
 
 def konec_programu():
+    """Ukončí běh aplikace a vypíše potvrzovací zprávu do konzole. 
+    Pomocí systémového volání zajistí okamžité a čisté zavření celého skriptu."""
+
     print("Konec programu")
     sys.exit()         
 
 def logika_apky():
-    """Hlavní řídicí funkce aplikace, která propojuje uživatelské rozhraní s jednotlivými operacemi nad úkoly.
-    Program v nekonečné smyčce zpracovává volby uživatele, volá příslušné podfunkce a zajišťuje korektní ukončení celého systému."""
+    """Hlavní nekonečný cyklus aplikace, který propojuje volbu uživatele s konkrétními funkcemi. 
+    Na základě vstupu z menu spouští přidávání, prohlížení, mazání úkolů nebo ukončení celého programu."""
+
     Task_Manager = True
     while Task_Manager: 
         zadana_volba = hlavni_menu()
